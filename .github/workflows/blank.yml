@@ -1,0 +1,13 @@
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment:
+      MY_VARIABLE: 'value'
+    
+    steps:
+      - name: Set Variable
+        env:
+          MY_SUB_VARIABLE: ${{ env.MY_VARIABLE + '_suffix' }}  # This will not work
+
+      - name: Output Variable
+        run: echo "MY_SUB_VARIABLE=${{ env.MY_SUB_VARIABLE }}"
