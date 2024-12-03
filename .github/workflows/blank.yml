@@ -1,13 +1,14 @@
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment:
-      MY_VARIABLE: 'value'
-    
-    steps:
-      - name: Set Variable
-        env:
-          MY_SUB_VARIABLE: ${{ env.MY_VARIABLE + '_suffix' }}  # This will not work
 
-      - name: Output Variable
+    steps:
+      - name: Define Variables
+        id: defs
+        run:
+          echo "MY_VARIABLE=value" >> $GITHUB_ENV
+
+      - name: Set New Variable Based on Existing Variable
+        env:
+          MY_SUB_VARIABLE: ${{ env.MY_VARIABLE + '_suffix' }}
         run: echo "MY_SUB_VARIABLE=${{ env.MY_SUB_VARIABLE }}"
